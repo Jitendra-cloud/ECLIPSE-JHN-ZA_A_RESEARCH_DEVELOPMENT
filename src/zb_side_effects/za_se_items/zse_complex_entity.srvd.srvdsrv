@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition'
+define service ZSE_COMPLEX_ENTITY {
+  expose ZSE_C_RAPCINVOICE as Invoice;
+  expose ZSE_C_RAPCITEMS   as Items;
+  expose ZSE_C_RAPCITEMS2  as Items2;
+}

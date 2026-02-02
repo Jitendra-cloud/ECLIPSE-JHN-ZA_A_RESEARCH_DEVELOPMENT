@@ -1,0 +1,14 @@
+abstract;
+strict ( 2 );
+with hierarchy;
+
+define behavior for ZSE_S_RAPCREATEINVOICE alias Invoice
+{
+  field ( suppress ) DummyKey;
+  association _Items;
+}
+
+define behavior for ZSE_S_RAPCREATE_ITEMS alias Item
+{
+  field ( suppress ) DummyKey;
+}

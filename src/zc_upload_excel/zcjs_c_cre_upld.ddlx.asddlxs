@@ -1,0 +1,46 @@
+@Metadata.layer: #CORE
+@UI.headerInfo.title.type: #STANDARD
+@UI.headerInfo.title.value: 'TckId'
+@UI.headerInfo.description.type: #STANDARD
+@UI.headerInfo.description.value: 'TckId'
+
+@UI.presentationVariant: [ { qualifier: 'pvariant',
+                             text: '(#PresentationVariant)',
+                             maxItems: 10,
+                             sortOrder: [ { by: 'ExcelFilename', direction: #DESC } ],
+                             visualizations: [{type: #AS_LINEITEM}] }]
+
+@UI.selectionPresentationVariant: [ { text: '(#SelectionPresentationVariant)',
+                                      presentationVariantQualifier: 'pvariant',
+                                      selectionVariantQualifier: 'svariant' } ]
+
+annotate view ZCJS_C_CRE_UPLD with
+{
+  @EndUserText.label: 'TckId'
+  @UI.facet: [ { label: 'General Information', id: 'GeneralInfo', purpose: #STANDARD, position: 10 , type: #IDENTIFICATION_REFERENCE } ]
+
+
+//  @UI.identification: [ { position: 10 , label: 'Table Name' }]
+//  @UI.lineItem: [ { position: 10 , label: 'Table Name' } ]
+//  @UI.selectionField: [ { position: 10 } ]
+  @UI.hidden: true
+  TckId;
+
+  @UI.lineItem: [ { position: 7 , label: 'File Name' , cssDefault.width: '15rem' } ]
+//  @UI.identification: [ { position: 7 , label: 'File Name' } ]
+  @EndUserText.label: 'File Name'
+  ExcelFilename;
+  
+  @UI.lineItem: [ { position: 8 , label: 'Target Database', cssDefault.width: '15rem' } ]
+  @UI.identification: [ { position: 8 , label: 'Target Database' } ]
+  TargetDatabase;
+
+  @UI.lineItem: [ { position: 9 , label: 'Excel', cssDefault.width: '25rem' } ]
+  @UI.identification: [ { position: 9 , label: 'Excel' } ]
+  @EndUserText.label: 'Excel'
+  ExcelAttachment;
+  
+
+
+
+}

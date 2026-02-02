@@ -1,0 +1,100 @@
+managed implementation in class zbp_se_i_rapcinvoice unique;
+strict ( 2 );  //strict ( 1 );
+with draft;
+
+define behavior for ZSE_I_RAPCINVOICE alias Invoice
+with additional save
+persistent table zdse_invoice
+draft table zdse_d_invoice
+lock master total etag LastChanged
+authorization master ( global, instance )
+early numbering
+
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) Document, HidePosition2;
+
+  association _Items { create; with draft; }
+  association _Items2 { create; with draft; }
+
+  action createItem result [1] $self;
+  action switchItem result [1] $self;
+
+  static action CreateInvoiceDocument deep parameter ZSE_S_RAPCreateInvoice;
+
+  determination create_items2 on modify { create; update; field Partner; }
+  determination hideLineItem2 on modify { create; field HidePosition1; }
+
+  mapping for zdse_invoice
+    {
+      Document         = document;
+      Partner          = partner;
+      DocDate          = doc_date;
+      DocTime          = doc_time;
+      HidePosition1    = hide_pos1;
+      HidePosition2    = hide_pos2;
+      LocalLastChanged = local_last_changed;
+      LastChanged      = last_changed;
+    }
+}
+
+define behavior for ZSE_I_RAPCITEMS alias Items
+persistent table zdjs_items
+draft table zdjs_d_items
+lock dependent by _Invoice
+authorization dependent by _Invoice
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) Document;
+  field ( readonly ) ItemNumber;
+
+  association _Invoice { with draft; }
+
+  mapping for zdjs_items
+    {
+      Document   = document;
+      ItemNumber = pos_number;
+      Material   = material;
+      Price      = price;
+      Quantity   = quantity;
+      Currency   = currency;
+    }
+
+}
+
+define behavior for ZSE_I_RAPCITEMS2 alias Items2
+persistent table zdjs_items2
+draft table zdjs_d_items2
+lock dependent by _Invoice
+authorization dependent by _Invoice
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) Document;
+  field ( readonly ) ItemNumber;
+
+  association _Invoice { with draft; }
+
+  mapping for zdjs_items2
+    {
+      Document   = document;
+      ItemNumber = pos_number;
+      Material   = material;
+      Price      = price;
+      Quantity   = quantity;
+      Currency   = currency;
+    }
+
+}

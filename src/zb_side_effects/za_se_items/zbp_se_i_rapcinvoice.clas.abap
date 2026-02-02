@@ -1,0 +1,9 @@
+CLASS zbp_se_i_rapcinvoice DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zse_i_rapcinvoice.
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZBP_SE_I_RAPCINVOICE IMPLEMENTATION.
+ENDCLASS.

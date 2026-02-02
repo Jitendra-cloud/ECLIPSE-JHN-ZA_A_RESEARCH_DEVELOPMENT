@@ -1,0 +1,35 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZCJS_C_XL_USER alias XLHead
+{
+  use create;
+  use update;
+  use delete;
+
+  use action uploadExcelData;
+
+  use action Activate;
+  use action Edit;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  side effects
+  {
+    action uploadExcelData affects $self;
+    field Attachment affects entity _XLData, field ExcelLineCount, field FileStatus, field LocalLastChangedAt;
+  }
+
+  use association _XLData { create; with draft; }
+
+}
+
+define behavior for ZCJS_C_XL_DATA alias XLData
+{
+  use association _XLUser { with draft; }
+
+  use action processData;
+
+}

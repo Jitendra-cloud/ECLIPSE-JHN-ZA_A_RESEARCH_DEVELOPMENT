@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition'
+@ObjectModel.leadingEntity.name: 'ZCJS_C_XL_USER'
+define service Zjs_sd_exl_upld {
+  expose ZCJS_C_XL_USER as Users;
+  expose ZCJS_C_XL_DATA as Data;
+}

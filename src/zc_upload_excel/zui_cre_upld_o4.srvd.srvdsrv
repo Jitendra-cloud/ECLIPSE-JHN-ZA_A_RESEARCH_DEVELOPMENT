@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZCJS_C_CRE_UPLD'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZCJS_C_CRE_UPLD'
+  }
+}
+define service ZUI_CRE_UPLD_O4 provider contracts odata_v4_ui {
+  expose ZCJS_C_CRE_UPLD as CRE;
+}

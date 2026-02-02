@@ -1,0 +1,5 @@
+CLASS zrap99_bp_traveltp_sol DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zrap99_r_traveltp_sol.
+ENDCLASS.
+
+CLASS zrap99_bp_traveltp_sol IMPLEMENTATION.
+ENDCLASS.
