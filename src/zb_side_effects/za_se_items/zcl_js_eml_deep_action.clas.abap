@@ -15,7 +15,7 @@ ENDCLASS.
 
 
 
-CLASS zcl_js_eml_deep_action IMPLEMENTATION.
+CLASS ZCL_JS_EML_DEEP_ACTION IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

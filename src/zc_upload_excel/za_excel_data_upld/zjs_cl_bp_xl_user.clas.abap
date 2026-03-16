@@ -12,7 +12,11 @@ CLASS zjs_cl_bp_xl_user DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zcjs_i_
              line_id         type string, "Internal Use during Upload
            END OF gty_gr_xl.
 
+protected section.
+private section.
 ENDCLASS.
 
-CLASS zjs_cl_bp_xl_user IMPLEMENTATION.
+
+
+CLASS ZJS_CL_BP_XL_USER IMPLEMENTATION.
 ENDCLASS.

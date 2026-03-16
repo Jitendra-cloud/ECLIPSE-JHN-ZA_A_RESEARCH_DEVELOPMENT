@@ -6,7 +6,7 @@ CLASS zjs_cl_02_reading_excel DEFINITION
   PUBLIC SECTION.
     INTERFACES if_oo_adt_classrun.
 
-    TYPES tt_excel TYPE STANDARD TABLE OF zdjs_EXCEL_USER WITH EMPTY KEY.
+    TYPES tt_excel TYPE STANDARD TABLE OF zdjs_stpo WITH EMPTY KEY.
 
     METHODS convert_excel_file_to_table
       IMPORTING id_stream        TYPE xstring
@@ -42,22 +42,23 @@ CLASS ZJS_CL_02_READING_EXCEL IMPLEMENTATION.
 
   METHOD if_oo_adt_classrun~main.
 
-    SELECT * FROM zdjs_cre_upld
-    WHERE excel_filename = '62. ZDJS_EXCEL_USER.xlsx'
-    INTO TABLE @DATA(ls_attachement).
+*    SELECT * FROM zdjs_cre_upld
+*    WHERE excel_filename = '32. STPO_1.xlsx'
+*    INTO TABLE @DATA(ls_attachement).
+*
+*    TRY.
+*        DATA(lt_excel) = convert_excel_file_to_table( ls_attachement[ 1 ]-excel_attachment ).
+*      CATCH zcxjs_excel_error INTO DATA(lo_excel_error).
+*        RETURN.
+*    ENDTRY.
+*
+*    DELETE FROM zdjs_stpo.
+*    LOOP AT lt_excel INTO DATA(ls_excel).
+*
+*      INSERT zdjs_stpo FROM @ls_excel.
+*    ENDLOOP.
 
-    TRY.
-        DATA(lt_excel) = convert_excel_file_to_table( ls_attachement[ 1 ]-excel_attachment ).
-      CATCH zcxjs_excel_error INTO DATA(lo_excel_error).
-*        INSERT lo_excel_error INTO TABLE data(reported).
-        RETURN.
-    ENDTRY.
-
-    DELETE FROM zdjs_EXCEL_USER.
-    LOOP AT lt_excel INTO DATA(ls_excel).
-*        ls_excel-MANDT = 100.
-      INSERT zdjs_EXCEL_USER FROM @ls_excel.
-    ENDLOOP.
+    DELETE FROM zdjs_adr6.
 
   ENDMETHOD.
 ENDCLASS.

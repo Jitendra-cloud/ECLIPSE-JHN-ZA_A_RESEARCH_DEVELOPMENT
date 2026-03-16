@@ -15,7 +15,9 @@ ENDCLASS.
 
 
 
-CLASS zjs_cl_amdp_test IMPLEMENTATION.
+CLASS ZJS_CL_AMDP_TEST IMPLEMENTATION.
+
+
   METHOD amdp_test_method
          BY DATABASE FUNCTION FOR HDB LANGUAGE SQLSCRIPT
          OPTIONS READ-ONLY
@@ -36,5 +38,4 @@ CLASS zjs_cl_amdp_test IMPLEMENTATION.
         from :itab_rapcitems;
 
   ENDMETHOD.
-
 ENDCLASS.

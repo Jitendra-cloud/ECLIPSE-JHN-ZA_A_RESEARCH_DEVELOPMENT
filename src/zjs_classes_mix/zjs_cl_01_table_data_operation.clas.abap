@@ -27,9 +27,9 @@ CLASS ZJS_CL_01_TABLE_DATA_OPERATION IMPLEMENTATION.
 *        SELECT * FROM zdjs_items INTO TABLE @data(lt_items).
 *        INSERT zdjs_items2 FROM TABLE @lt_items.
 
-    DELETE FROM zjs_travel.
-    SELECT * FROM /dmo/travel INTO TABLE @DATA(lt_tab2).
-    INSERT zjs_travel FROM TABLE @lt_tab2.
+    DELETE FROM zdjs_cre_upld_2.
+    SELECT * FROM zdjs_cre_upld INTO TABLE @DATA(lt_tab2).
+    INSERT zdjs_cre_upld_2 FROM TABLE @lt_tab2.
 
   ENDMETHOD.
 
@@ -69,6 +69,7 @@ CLASS ZJS_CL_01_TABLE_DATA_OPERATION IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD create_test_data_from_table.
 
     DATA ls_invoice TYPE zdse_invoice.
@@ -91,21 +92,23 @@ CLASS ZJS_CL_01_TABLE_DATA_OPERATION IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD delete_from_table.
 
     DELETE FROM zdjs_invoice WHERE doc_date IS INITIAL.
 
   ENDMETHOD.
 
+
   METHOD if_oo_adt_classrun~main.
-    create_test_data( ).
+*    create_test_data( ).
 *    out->write( |Partner: { lines( lt_data ) }| ).
 
 *    delete_from_table(  ).
 
 *     create_test_data_from_table( ).
 
-*    copy_from_one_to_other_dtbase(  ).
+    copy_from_one_to_other_dtbase(  ).
 
   ENDMETHOD.
 ENDCLASS.

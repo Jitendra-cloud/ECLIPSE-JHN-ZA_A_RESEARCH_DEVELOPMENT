@@ -9,7 +9,10 @@ CLASS zjs_cl_nr_util DEFINITION PUBLIC FINAL CREATE PUBLIC .
 
 ENDCLASS.
 
-CLASS zjs_cl_nr_util IMPLEMENTATION.
+
+
+CLASS ZJS_CL_NR_UTIL IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.	
     " Maintain No Range Object

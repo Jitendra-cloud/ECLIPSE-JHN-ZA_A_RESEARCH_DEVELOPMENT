@@ -6,6 +6,7 @@ CLASS zjs_cl_nr_util_2 DEFINITION
   PUBLIC SECTION.
     INTERFACES if_oo_adt_classrun.
 
+protected section.
   PRIVATE SECTION.
     CONSTANTS c_object    TYPE cl_numberrange_objects=>nr_attributes-object   VALUE 'ZJSNUM_TL'.
     CONSTANTS c_package   TYPE cl_numberrange_objects=>nr_attributes-devclass VALUE 'ZJS_NUMBER_RANGE'.
@@ -26,7 +27,8 @@ ENDCLASS.
 
 
 
-CLASS zjs_cl_nr_util_2 IMPLEMENTATION.
+CLASS ZJS_CL_NR_UTIL_2 IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 *    create_number_range_object( out ).
@@ -93,6 +95,7 @@ CLASS zjs_cl_nr_util_2 IMPLEMENTATION.
     io_out->write( ld_rcode ).
   ENDMETHOD.
 
+
   METHOD read_number_range.
     TRY.
         cl_numberrange_intervals=>read(
@@ -111,5 +114,4 @@ CLASS zjs_cl_nr_util_2 IMPLEMENTATION.
         io_out->write( lo_js_error2 ).
     ENDTRY.
   ENDMETHOD.
-
 ENDCLASS.

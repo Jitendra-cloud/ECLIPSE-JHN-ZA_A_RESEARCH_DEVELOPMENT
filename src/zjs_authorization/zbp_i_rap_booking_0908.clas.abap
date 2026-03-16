@@ -1,5 +1,9 @@
 CLASS zbp_i_rap_booking_0908 DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_rap_travel_0908.
+protected section.
+private section.
 ENDCLASS.
 
-CLASS zbp_i_rap_booking_0908 IMPLEMENTATION.
+
+
+CLASS ZBP_I_RAP_BOOKING_0908 IMPLEMENTATION.
 ENDCLASS.

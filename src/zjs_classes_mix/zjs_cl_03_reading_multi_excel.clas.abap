@@ -26,7 +26,43 @@ CLASS zjs_cl_03_reading_multi_excel IMPLEMENTATION.
 
       IF ls_attachement-target_database = 'ZDJS_CSR_LOG' OR ls_attachement-target_database = 'ZDJS_STPO'.
 
-        CONTINUE.
+*        CONTINUE.
+
+        DATA: lo_struct_1 TYPE REF TO cl_abap_structdescr,
+              lo_table_1  TYPE REF TO cl_abap_tabledescr,
+              lr_data_1   TYPE REF TO data,
+              lv_type2_1  TYPE tabname.
+
+        lo_struct_1 ?= cl_abap_typedescr=>describe_by_name( ls_attachement-target_database ).
+        lo_table_1 = cl_abap_tabledescr=>create( p_line_type  = lo_struct_1
+                                               p_table_kind = cl_abap_tabledescr=>tablekind_std ).
+        CREATE DATA lr_data_1 TYPE HANDLE lo_table_1.
+        FIELD-SYMBOLS <lt_excel_1> TYPE STANDARD TABLE.
+        ASSIGN lr_data_1->* TO <lt_excel_1>.
+
+
+        TRY.
+            DATA(lo_sheet_1) = xco_cp_xlsx=>document->for_file_content( ls_attachement-excel_attachment )->read_access( )->get_workbook( )->worksheet->at_position( 1 ).
+            DATA(lo_pattern_1) = xco_cp_xlsx_selection=>pattern_builder->simple_from_to( )->from_column( xco_cp_xlsx=>coordinate->for_alphabetic_value( 'A' ) )->from_row( xco_cp_xlsx=>coordinate->for_numeric_value( 2 ) )->get_pattern( ).
+            DATA(lo_sheet2_1) = lo_sheet_1->select( lo_pattern_1 )->row_stream( )->operation->write_to( REF #( <lt_excel_1> ) ).
+            DATA(lo_string_val_1) = lo_sheet2_1->set_value_transformation( xco_cp_xlsx_read_access=>value_transformation->string_value ).
+            DATA(lo_execute_1) = lo_string_val_1->execute( ).
+
+            IF ls_attachement-excel_filename = '12. CSR_LOG_1.xlsx' OR ls_attachement-excel_filename = '32. STPO_1.xlsx' .
+              DELETE FROM (ls_attachement-target_database).
+            ENDIF.
+            INSERT (ls_attachement-target_database) FROM TABLE @<lt_excel_1>.
+
+            IF ls_attachement-excel_filename = '12. CSR_LOG_5.xlsx' OR ls_attachement-excel_filename = '32. STPO_5.xlsx' .
+              out->write( | { ls_attachement-target_database } : Data generated Successfully ({ lines( <lt_excel_1> ) })| ).
+            ENDIF.
+
+          CATCH cx_root INTO DATA(lo_excel_error_1).
+
+            out->write( |Error while processing Excel for table { ls_attachement-target_database }: | && lo_excel_error_1->get_text( ) ).
+
+            CONTINUE.
+        ENDTRY.
 
       ELSE.
 
@@ -53,9 +89,8 @@ CLASS zjs_cl_03_reading_multi_excel IMPLEMENTATION.
             DELETE FROM (ls_attachement-target_database).
             INSERT (ls_attachement-target_database) FROM TABLE @<lt_excel>.
 
-            out->write( | { ls_attachement-target_database } : Data generated Successfully| ).
+            out->write( | { ls_attachement-target_database } : Data generated Successfully ({ lines( <lt_excel> ) })| ).
 
-*        CATCH zcxjs_excel_error INTO DATA(lo_excel_error).
           CATCH cx_root INTO DATA(lo_excel_error).
 
             out->write( |Error while processing Excel for table { ls_attachement-target_database }: | && lo_excel_error->get_text( ) ).

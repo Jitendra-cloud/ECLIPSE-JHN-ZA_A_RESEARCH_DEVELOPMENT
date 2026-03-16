@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcljs_virtual_excel_lines IMPLEMENTATION.
+CLASS ZCLJS_VIRTUAL_EXCEL_LINES IMPLEMENTATION.
+
+
   METHOD if_sadl_exit_calc_element_read~calculate.
     LOOP AT it_requested_calc_elements INTO DATA(ld_virtual_field).
       LOOP AT ct_calculated_data ASSIGNING FIELD-SYMBOL(<ls_calculated_data>).
@@ -62,8 +64,8 @@ CLASS zcljs_virtual_excel_lines IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
+
   METHOD if_sadl_exit_calc_element_read~get_calculation_info.
 
   ENDMETHOD.
-
 ENDCLASS.

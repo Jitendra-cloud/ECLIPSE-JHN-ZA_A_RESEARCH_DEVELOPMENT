@@ -7,9 +7,13 @@
      INTERFACES if_oo_adt_classrun.
    PROTECTED SECTION.
    PRIVATE SECTION.
- ENDCLASS.
+ENDCLASS.
 
- CLASS zcl_generate_demo_data_0908 IMPLEMENTATION.
+
+
+CLASS ZCL_GENERATE_DEMO_DATA_0908 IMPLEMENTATION.
+
+
    METHOD if_oo_adt_classrun~main.
 
      " delete existing entries in the database table
@@ -70,5 +74,4 @@
 
      out->write( 'Travel and booking demo data inserted.').
    ENDMETHOD.
-
- ENDCLASS.
+ENDCLASS.

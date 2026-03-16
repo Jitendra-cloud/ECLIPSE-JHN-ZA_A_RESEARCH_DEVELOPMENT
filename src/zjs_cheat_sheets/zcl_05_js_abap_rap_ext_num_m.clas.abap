@@ -59,7 +59,8 @@ CLASS zcl_05_js_abap_rap_ext_num_m DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_05_js_abap_rap_ext_num_m IMPLEMENTATION.
+
+CLASS ZCL_05_JS_ABAP_RAP_EXT_NUM_M IMPLEMENTATION.
 
 
   METHOD class_constructor.
@@ -750,6 +751,7 @@ CLASS zcl_05_js_abap_rap_ext_num_m IMPLEMENTATION.
     out->write( data = rba_dyn_link name = `rba_dyn_link` ).
   ENDMETHOD.
 
+
   METHOD extract_from_failed.
     CLEAR errors.
 
@@ -822,7 +824,6 @@ CLASS zcl_05_js_abap_rap_ext_num_m IMPLEMENTATION.
     MODIFY zdemo_abap_rapt1 FROM TABLE @( VALUE #( ( key_field = 4 field1 = 'ggg' field2 = 'hhh' field3 = 40 field4 = 41 ) ) ).
 
   ENDMETHOD.
-
 
 
   METHOD initialize_dbtabs.
